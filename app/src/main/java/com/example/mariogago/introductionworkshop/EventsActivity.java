@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 public class EventsActivity extends AppCompatActivity {
 
-    public static final String NAME_EXTRA = "name";
-
     private TextView nameText;
     private Preferences preferences;
 
