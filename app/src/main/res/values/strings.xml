@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">IntroductionWorkshop</string>
+    <string name="name">Name</string>
+    <string name="next">Next</string>
+    <string name="events">Events</string>
+
+    <string name="name_missing">Your name is missing</string>
+
+</resources>
