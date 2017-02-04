@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private Button nextButton;
     private EditText nameText;
@@ -36,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
         if (name.trim().isEmpty()) {
             Toast.makeText(this, R.string.name_missing, Toast.LENGTH_LONG).show();
         } else {
-
             preferences.saveName(name);
 
             Intent intent = new Intent(this, EventsActivity.class);
             startActivity(intent);
+            finish();
         }
 
     }

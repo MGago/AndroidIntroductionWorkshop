@@ -3,6 +3,8 @@
     <string name="name">Name</string>
     <string name="next">Next</string>
     <string name="events">Events</string>
+    <string name="events_name">Name: %s</string>
+    <string name="events_location">Location: %1$f, %2$f</string>
 
     <string name="name_missing">Your name is missing</string>
 
