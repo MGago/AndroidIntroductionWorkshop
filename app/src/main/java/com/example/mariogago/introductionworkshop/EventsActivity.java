@@ -12,6 +12,7 @@ public class EventsActivity extends AppCompatActivity {
     public static final String NAME_EXTRA = "name";
 
     private TextView nameText;
+    private Preferences preferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,19 +20,9 @@ public class EventsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_events);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        preferences = new Preferences(this);
         nameText = (TextView) findViewById(R.id.events_name);
 
-        String name = getNameFromIntent();
-        nameText.setText(name);
-    }
-
-    @NonNull
-    private String getNameFromIntent() {
-        Intent intent = getIntent();
-        String name = intent.getStringExtra(NAME_EXTRA);
-        if (name == null) {
-            throw new RuntimeException("Name missing");
-        }
-        return name;
+        nameText.setText(preferences.getName());
     }
 }

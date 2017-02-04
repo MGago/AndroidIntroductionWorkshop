@@ -12,12 +12,14 @@ public class MainActivity extends AppCompatActivity {
 
     private Button nextButton;
     private EditText nameText;
+    private Preferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        preferences = new Preferences(this);
         nextButton = (Button) findViewById(R.id.main_next);
         nameText = (EditText) findViewById(R.id.main_name);
 
@@ -34,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         if (name.trim().isEmpty()) {
             Toast.makeText(this, R.string.name_missing, Toast.LENGTH_LONG).show();
         } else {
+
+            preferences.saveName(name);
+
             Intent intent = new Intent(this, EventsActivity.class);
-            intent.putExtra("name", name);
             startActivity(intent);
         }
 
