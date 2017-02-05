@@ -10,6 +10,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,10 +27,11 @@ public class EventsActivity extends AppCompatActivity implements LocationGetter.
 
     private TextView nameText;
     private TextView locationText;
-    private TextView eventNameText;
     private Preferences preferences;
     private LocationGetter locationGetter;
     private SearchEvents searchEvents;
+
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +42,9 @@ public class EventsActivity extends AppCompatActivity implements LocationGetter.
         preferences = new Preferences(this);
         nameText = (TextView) findViewById(R.id.events_name);
         locationText = (TextView) findViewById(R.id.events_location);
-        eventNameText = (TextView) findViewById(R.id.event_name);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_event);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         String name = preferences.getName();
 
@@ -93,11 +98,8 @@ public class EventsActivity extends AppCompatActivity implements LocationGetter.
 
     @Override
     public void onEventResults(List<SearchResponse.Event> events) {
-        String text = "";
-        for (SearchResponse.Event event : events) {
-            text += event.name.text + "\n";
-        }
-        eventNameText.setText(text);
+        EventsAdapter adapter = new EventsAdapter(events);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

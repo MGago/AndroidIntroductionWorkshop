@@ -39,11 +39,21 @@
             />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/event_name"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="@dimen/margin_double"
+        android:elevation="@dimen/elevation_appbar_secondary"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_event"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
 
 </LinearLayout>
