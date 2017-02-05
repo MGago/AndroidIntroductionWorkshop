@@ -1,5 +1,7 @@
 package com.example.mariogago.introductionworkshop;
 
+import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +21,12 @@ import java.util.Locale;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewHolder> {
     private final List<SearchResponse.Event> events;
+    private final DateFormat dateFormat;
 
     public EventsAdapter(List<SearchResponse.Event> events) {
         this.events = events;
+        dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat
+                .MEDIUM, Locale.getDefault());
     }
 
     @Override
@@ -56,12 +61,10 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
             imageView = (ImageView) itemView.findViewById(R.id.event_item_image);
         }
 
-        private void bind(SearchResponse.Event event) {
+        private void bind(final SearchResponse.Event event) {
             nameText.setText(event.name.text);
             locationText.setText(event.venue.name);
 
-            DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat
-                    .MEDIUM, Locale.getDefault());
             dateText.setText(dateFormat.format(event.start.local));
 
             if (event.logo == null || event.logo.url == null) {
@@ -70,6 +73,15 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
                 Picasso.with(itemView.getContext()).load(event.logo.url).centerCrop().fit().into
                         (imageView);
             }
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), EventDetails.class);
+                    intent.putExtra("name", event.name.text);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
 
         }
     }
