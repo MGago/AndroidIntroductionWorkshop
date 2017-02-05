@@ -2,6 +2,9 @@ package com.example.mariogago.introductionworkshop.api;
 
 import android.location.Location;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,7 +23,10 @@ public class SearchEvents {
     public SearchEvents() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(
+                        new GsonBuilder()
+                                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                                .create()))
                 .build();
 
         service = retrofit.create(EventbriteApi.class);

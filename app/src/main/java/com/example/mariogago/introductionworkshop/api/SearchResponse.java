@@ -1,5 +1,6 @@
 package com.example.mariogago.introductionworkshop.api;
 
+import java.util.Date;
 import java.util.List;
 
 public class SearchResponse {
@@ -26,7 +27,7 @@ public class SearchResponse {
         }
 
         public class DateTime {
-            public String local;
+            public Date local;
         }
 
         public class Venue {

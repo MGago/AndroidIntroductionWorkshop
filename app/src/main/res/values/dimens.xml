@@ -9,4 +9,5 @@
 
     <dimen name="elevation_appbar_primary">4dp</dimen>
     <dimen name="elevation_appbar_secondary">2dp</dimen>
+    <dimen name="card_image_height">100dp</dimen>
 </resources>
