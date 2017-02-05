@@ -1,7 +1,6 @@
 package com.example.mariogago.introductionworkshop;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -14,16 +13,22 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.example.mariogago.introductionworkshop.api.SearchEvents;
+import com.example.mariogago.introductionworkshop.api.SearchResponse;
 
-public class EventsActivity extends AppCompatActivity implements LocationGetter.Callback {
+import java.util.List;
+
+public class EventsActivity extends AppCompatActivity implements LocationGetter.Callback,
+        SearchEvents.Callback {
 
     private static int REQUEST_PERMISSION_CODE = 11;
 
     private TextView nameText;
     private TextView locationText;
+    private TextView eventNameText;
     private Preferences preferences;
     private LocationGetter locationGetter;
+    private SearchEvents searchEvents;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +39,7 @@ public class EventsActivity extends AppCompatActivity implements LocationGetter.
         preferences = new Preferences(this);
         nameText = (TextView) findViewById(R.id.events_name);
         locationText = (TextView) findViewById(R.id.events_location);
+        eventNameText = (TextView) findViewById(R.id.event_name);
 
         String name = preferences.getName();
 
@@ -80,5 +86,22 @@ public class EventsActivity extends AppCompatActivity implements LocationGetter.
     @Override
     public void onNewLocation(Location location) {
         locationText.setText(getResources().getString(R.string.events_location, location.getLatitude(), location.getLongitude()));
+
+        searchEvents = new SearchEvents();
+        searchEvents.search(location, this);
+    }
+
+    @Override
+    public void onEventResults(List<SearchResponse.Event> events) {
+        String text = "";
+        for (SearchResponse.Event event : events) {
+            text += event.name.text + "\n";
+        }
+        eventNameText.setText(text);
+    }
+
+    @Override
+    public void onError() {
+        Toast.makeText(this, "Error while search events", Toast.LENGTH_LONG).show();
     }
 }

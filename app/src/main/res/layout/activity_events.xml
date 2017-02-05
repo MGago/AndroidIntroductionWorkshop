@@ -15,7 +15,6 @@
         android:padding="@dimen/margin_double"
         android:elevation="@dimen/elevation_appbar_secondary"
         >
-
         <TextView
             android:id="@+id/events_name"
             android:layout_width="match_parent"
@@ -39,5 +38,12 @@
             android:drawablePadding="@dimen/margin_half"
             />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/event_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
 
 </LinearLayout>

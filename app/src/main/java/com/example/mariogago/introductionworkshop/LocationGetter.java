@@ -7,7 +7,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
-public class LocationGetter implements LocationListener{
+public class LocationGetter implements LocationListener {
 
     private final LocationManager systemService;
     private Callback callback;
